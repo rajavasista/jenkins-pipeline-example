@@ -1,6 +1,6 @@
 pipeline {
-
-	agent any
+	
+agent any
 	
 	tools {
 		maven "MY_MAVEN"
@@ -29,5 +29,4 @@ pipeline {
 			}
 		}
 	}
-
 }
