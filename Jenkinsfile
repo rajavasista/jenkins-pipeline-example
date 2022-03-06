@@ -6,6 +6,10 @@ agent any
 		maven "MY_MAVEN"
 		jdk "MY_JAVA"
 	}
+
+	environment {
+		DOCKERHUB_CREDENTIALS = credentials('DOCKER_CREDS')
+	}
 	
 	stages {
 		//stage('Initialise') {
@@ -30,6 +34,12 @@ agent any
 					sh 'docker build -t vasistaops/myjavaapp:${BUILD_NUMBER} .'
 					sh 'echo "Docker Image built successfully...."'
 				}
+			}
+		}
+		stage('Push Docker Image') {
+			steps {
+				sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+				sh 'docker push vasistaops/myjavaapp:${BUILD_NUMBER}'
 			}
 		}
 	}
