@@ -25,7 +25,7 @@ agent any
 		}
 		stage('Build Docker Image') {
 			steps {
-				dir("${WORKSPACE}/JavaBuildPipeline/my-app") {
+				dir("${WORKSPACE}/my-app") {
 					sh 'echo "Building Docker Image...."'
 					sh 'docker build -t vasistaops/myjavaapp:${BUILD_NUMBER} .'
 					sh 'echo "Docker Image built successfully...."'
